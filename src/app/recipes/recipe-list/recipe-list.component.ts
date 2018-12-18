@@ -9,7 +9,7 @@ import { RecipeService } from '../recipe.service';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
-  recipes;
+  recipes: any = [];
 
   constructor(private recipeService: RecipeService, 
   	private router: Router,
@@ -19,7 +19,7 @@ export class RecipeListComponent implements OnInit {
     this.recipeService.recipeChanged.subscribe((recipes) => {
       this.recipes = recipes;
     });
-    this.recipes = this.recipeService.fetchRecipes();
+    this.recipeService.fetchRecipes();
   }
 
   onNewRecipe() {

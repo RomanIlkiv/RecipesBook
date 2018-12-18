@@ -3,6 +3,7 @@ import {Http} from '@angular/http';
 
 import {Recipe} from './recipe.model';
 import {Ingredient} from '../shared/ingredient.model';
+import {AuthService} from '../auth/auth.service';
 
 import {Subject} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -10,35 +11,21 @@ import {map} from 'rxjs/operators';
 @Injectable()
 export class RecipeService {
 	recipeChanged = new Subject();
-	databaseUrl = 'https://recipebook-57ef9.firebaseio.com/recipes.json';
-
-	/*private recipes: Recipe[] = [
-		new Recipe('A test Recipe', 
-			'Recipe scription', 
-			'https://gdsit.cdn-immedia.net/2017/01/CARNE.jpg',
-			[
-				new Ingredient('Meat', 1),
-				new Ingredient('French Fries', 20),
-			]),
-		new Recipe('Another test Recipe', 
-			'Recipe scription', 
-			'https://gdsit.cdn-immedia.net/2017/01/CARNE.jpg',
-			[
-				new Ingredient('Buns', 1),
-				new Ingredient('Meat', 1)
-			]),
-	];*/
+	databaseUrl = 'https://recipebook-57ef9.firebaseio.com/recipes.json?auth=';
 
 	private recipes: Recipe[] = [];
 
-	constructor(private http: Http) {}
+	constructor(private http: Http, private authService: AuthService) {}
 
 	storeRecipes() {
-		return this.http.put(this.databaseUrl, this.getRecipes());
+		const token = this.authService.getToken();
+
+		return this.http.put(this.databaseUrl + token, this.getRecipes());
 	}
 
 	fetchRecipes() {
-		return this.http.get(this.databaseUrl)
+		const token = this.authService.getToken();
+		return this.http.get(this.databaseUrl + token)
 		.pipe(map((response) => {
 			var recipes = response.json();
 			for (var recipe of recipes) {
