@@ -5,11 +5,11 @@ export class Recipe {
 	public ingredients;
 	public id: number;
 
-	constructor(name: string, desc: string, imagePath: string, ingredients, id: number) {
+	constructor(name: string, desc: string, imagePath: string, ingredients) {
 		this.name = name;
 		this.description = desc;
 		this.imagePath = imagePath;
 		this.ingredients = ingredients;
-		this.id = id;
+		this.id = Math.floor(Math.random() * 100000001);
 	} 
 }
