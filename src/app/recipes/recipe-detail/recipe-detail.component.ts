@@ -23,10 +23,12 @@ export class RecipeDetailComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
+      console.log(params);
       this.id = params.id;
       this.recipe = this.recipeService.getRecipeById(params.id) || this.recipe;
       this.recipeService.recipeChanged.subscribe(
         (resipes) => {
+          console.log(resipes, 444);
           this.recipe = this.recipeService.getRecipeById(params.id);
         }
       );
