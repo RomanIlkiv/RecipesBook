@@ -39,7 +39,6 @@ export class RecipeService {
 			(recipes) => {
 				this.recipes = recipes;
 				this.recipeChanged.next(this.recipes.slice());
-				console.log(recipes);
 			}
 		);
 	}

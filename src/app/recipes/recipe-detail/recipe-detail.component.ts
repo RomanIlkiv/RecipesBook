@@ -12,7 +12,8 @@ import {Ingredient} from '../../shared/ingredient.model';
 })
 export class RecipeDetailComponent implements OnInit {
 	//@Input() recipe;
-  recipe = {};
+  recipe = {ingredients: []};
+  console.log(recipe, 77);
   id;
 
   constructor(private shoppingListService: ShoppingListService, 
@@ -23,6 +24,7 @@ export class RecipeDetailComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
       this.id = params.id;
+      this.recipe = this.recipeService.getRecipeById(params.id) || this.recipe;
       this.recipeService.recipeChanged.subscribe(
         (resipes) => {
           this.recipe = this.recipeService.getRecipeById(params.id);
