@@ -13,7 +13,6 @@ import {Ingredient} from '../../shared/ingredient.model';
 export class RecipeDetailComponent implements OnInit {
 	//@Input() recipe;
   recipe = {ingredients: []};
-  console.log(recipe, 77);
   id;
 
   constructor(private shoppingListService: ShoppingListService, 
@@ -28,7 +27,6 @@ export class RecipeDetailComponent implements OnInit {
       this.recipe = this.recipeService.getRecipeById(params.id) || this.recipe;
       this.recipeService.recipeChanged.subscribe(
         (resipes) => {
-          console.log(resipes, 444);
           this.recipe = this.recipeService.getRecipeById(params.id);
         }
       );
