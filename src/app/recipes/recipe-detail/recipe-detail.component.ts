@@ -12,7 +12,12 @@ import {Ingredient} from '../../shared/ingredient.model';
 })
 export class RecipeDetailComponent implements OnInit {
 	//@Input() recipe;
-  recipe = {ingredients: []};
+  recipe = {
+    name: '', 
+    imagePath: '', 
+    description: '', 
+    ingredients: []
+  };
   id;
 
   constructor(private shoppingListService: ShoppingListService, 
